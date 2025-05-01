@@ -1,0 +1,24 @@
+groups:
+- name: trading-alerts
+  rules:
+  - alert: HighOrderLatency
+    expr: histogram_quantile(0.99, sum(rate(order_execution_latency_seconds_bucket[5m])) by (service) > 0.5
+    for: 5m
+    labels:
+      severity: critical
+    annotations:
+      summary: "High order execution latency"
+      description: "Service {{ $labels.service }} has 99th percentile latency above 500ms"
+
+  - alert: LiquidityCrisis
+    expr: avg_over_time(liquidity_score[10m]) < 0.1
+    labels:
+      severity: page
+    annotations:
+      response_plan: "https://status.quantum/playbooks/liquidity-crisis"
+
+  - alert: FixDisconnect
+    expr: count(fix_session_connected{status="0"}) by (session) > 0
+    for: 1m
+    labels:
+      severity: warning

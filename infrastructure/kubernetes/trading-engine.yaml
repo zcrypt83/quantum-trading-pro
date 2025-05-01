@@ -1,0 +1,26 @@
+# infrastructure/kubernetes/trading-engine.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trading-engine
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: trading-engine
+  template:
+    metadata:
+      labels:
+        app: trading-engine
+    spec:
+      containers:
+      - name: engine
+        image: quantumtrading/engine:3.4.1
+        resources:
+          limits:
+            cpu: "4"
+            memory: 16Gi
+        ports:
+        - containerPort: 3000
+      nodeSelector:
+        hardware-type: low-latency

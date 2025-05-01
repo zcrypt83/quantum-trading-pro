@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package execution.v1;
+
+service ExecutionService {
+  rpc ExecuteOrder(OrderRequest) returns (stream ExecutionReport);
+  rpc CancelOrder(CancelRequest) returns (CancelResponse);
+}
+
+message OrderRequest {
+  string order_id = 1;
+  string symbol = 2;
+  double quantity = 3;
+  OrderType order_type = 4;
+  double price = 5;
+  
+  enum OrderType {
+    MARKET = 0;
+    LIMIT = 1;
+    STOP = 2;
+  }
+}
+
+message ExecutionReport {
+  string order_id = 1;
+  ExecutionStatus status = 2;
+  double filled_quantity = 3;
+  double avg_price = 4;
+  
+  enum ExecutionStatus {
+    NEW = 0;
+    PARTIALLY_FILLED = 1;
+    FILLED = 2;
+    REJECTED = 3;
+  }
+}

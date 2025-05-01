@@ -1,0 +1,20 @@
+{
+    "api": {
+      "baseUrl": "https://api.quantumtrading.pro/v3",
+      "websocket": "wss://feed.quantumtrading.pro/ws",
+      "endpoints": {
+        "orderBook": "/orderbook/{symbol}",
+        "historicalData": "/history/{symbol}/{interval}"
+      }
+    },
+    "optimization": {
+      "throttleRates": {
+        "priceUpdates": 100,
+        "orderUpdates": 250
+      },
+      "webWorkers": {
+        "chartCalculations": true,
+        "orderProcessing": true
+      }
+    }
+  }

@@ -1,0 +1,27 @@
+auth_enabled: false
+
+server:
+  http_listen_port: 3100
+
+common:
+  storage:
+    s3:
+      endpoint: s3://quantum-logs-prod
+      region: us-east-1
+      bucket_name: trading-logs
+      secret_access_key: ${LOKI_S3_SECRET}
+      access_key_id: ${LOKI_S3_KEY}
+  replication_factor: 3
+
+schema_config:
+  configs:
+    - from: 2020-10-24
+      store: boltdb-shipper
+      object_store: s3
+      schema: v11
+      index:
+        prefix: index_
+        period: 24h
+
+analytics:
+  reporting_enabled: false

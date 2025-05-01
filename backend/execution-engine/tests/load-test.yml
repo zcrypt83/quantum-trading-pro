@@ -1,0 +1,18 @@
+# backend/execution-engine/tests/load-test.yml
+config:
+  target: "http://execution-engine:3000"
+  phases:
+    - duration: 60
+      arrivalRate: 100
+      name: "Warmup"
+    - duration: 300
+      arrivalRate: 1000
+      name: "Peak load"
+  scenarios:
+    - flow:
+        - post:
+            url: "/execute"
+            json:
+              strategy: "HFT"
+              instrument: "BTC-USD"
+              amount: 1000000

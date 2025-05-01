@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+package marketdata;
+
+message NormalizedMarketData {
+  string symbol = 1;
+  double exchange_timestamp = 2;
+  double system_timestamp = 3;
+  
+  message Level {
+    double price = 1;
+    double quantity = 2;
+    int32 orders = 3;
+  }
+
+  repeated Level bids = 4;
+  repeated Level asks = 5;
+  
+  enum DataType {
+    SNAPSHOT = 0;
+    DELTA = 1;
+  }
+  
+  DataType data_type = 6;
+  string exchange = 7;
+  uint64 sequence_number = 8;
+}

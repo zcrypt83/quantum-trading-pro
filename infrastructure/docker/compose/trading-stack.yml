@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+  order-matching:
+    image: quantum/execution-engine:${TAG:-latest}
+    configs:
+      - source: engine-config
+        target: /app/config/production.json
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 16G
+    networks:
+      - trading-net
+
+  market-data:
+    image: quantum/market-data:${TAG:-latest}
+    environment:
+      KAFKA_BROKERS: kafka:9092
+      CLUSTER_NODES: market-data-1,market-data-2
+    depends_on:
+      - kafka
+    networks:
+      - trading-net
+
+  kafka:
+    image: bitnami/kafka:3.4
+    environment:
+      KAFKA_CFG_NODE_ID: 1
+      KAFKA_CFG_PROCESS_ROLES: controller,broker
+      KAFKA_CFG_LISTENERS: CONTROLLER://:9093,EXTERNAL://:9092
+      KAFKA_CFG_ADVERTISED_LISTENERS: EXTERNAL://kafka:9092
+    volumes:
+      - kafka-data:/bitnami
+    networks:
+      - trading-net
+
+configs:
+  engine-config:
+    file: ./config/engine.prod.json
+
+networks:
+  trading-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.12.0.0/24
+
+volumes:
+  kafka-data:
+    driver: local
+    driver_opts:
+      type: tmpfs
+      device: tmpfs

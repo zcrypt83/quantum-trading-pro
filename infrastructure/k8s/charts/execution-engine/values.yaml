@@ -1,0 +1,44 @@
+replicaCount: 12
+updateStrategy:
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 1
+    maxUnavailable: 0%
+
+resources:
+  limits:
+    cpu: "8"
+    memory: "32Gi"
+  requests:
+    cpu: "4"
+    memory: "16Gi"
+
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchExpressions:
+            - key: app
+              operator: In
+              values: ["execution-engine"]
+        topologyKey: "kubernetes.io/hostname"
+
+nodeSelector:
+  node-type: low-latency
+
+tolerations:
+- key: "dedicated"
+  operator: "Equal"
+  value: "trading"
+  effect: "NoSchedule"
+
+autoscaling:
+  enabled: true
+  minReplicas: 8
+  maxReplicas: 50
+  targetCPUUtilizationPercentage: 60
+  targetMemoryUtilizationPercentage: 85
+
+env:
+  FIX_ENDPOINT: "fix.quantum.internal:9876"
+  RISK_THRESHOLD: "0.05"
