@@ -1,4 +1,3 @@
-// backend/execution-engine/src/order-manager.js
 import { EventEmitter } from 'events';
 import { FIXConnector } from './connectors/fix';
 import { RiskValidator } from '@shared/risk';
