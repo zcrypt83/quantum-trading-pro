@@ -1,4 +1,3 @@
-# backend/execution-engine/tests/load-test.yml
 config:
   target: "http://execution-engine:3000"
   phases:
