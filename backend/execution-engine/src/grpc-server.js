@@ -1,4 +1,3 @@
-// backend/execution-engine/src/grpc-server.js
 import { Server } from '@grpc/grpc-js';
 import { OrderService } from '../proto/execution_grpc_pb';
 import { OrderManager } from './order-manager';
