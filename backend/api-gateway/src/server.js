@@ -1,4 +1,3 @@
-// backend/api-gateway/src/server.js
 import Fastify from 'fastify';
 import jwt from '@fastify/jwt';
 import swagger from '@fastify/swagger';
