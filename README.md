@@ -50,8 +50,7 @@
 ## ⚡ ¡Cómo Contribuir!
 
 1. **Clona el repo**: `git clone https://github.com/tu-usuario/quantum-trading-pro`
-2. **Revisa las [issues "good first issue"](https://github.com/tu-usuario/quantum-trading-pro/issues)**
-3. **Únete al Discord**: [https://discord.gg/w8V549VC] para coordinar desarrollos.
+2. **Únete al Discord**: [https://discord.gg/w8V549VC] para coordinar desarrollos.
 
 **Recompensas**: ¡Los contribuidores destacados recibirán acceso a APIs premium de datos de mercado!
 
