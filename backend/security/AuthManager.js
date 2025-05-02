@@ -1,4 +1,3 @@
-// backend/security/AuthManager.js
 const jose = require('jose');
 
 class InstitutionalAuth {
