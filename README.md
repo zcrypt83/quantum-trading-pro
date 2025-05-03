@@ -56,7 +56,7 @@
 
 ---
 
-## FAQ (🚨 Sé honesto aquí)
+## FAQ 
 
 ❓ **¿Realmente usan computación cuántica?**  
 👉 Hoy somos **clásicos con visión cuántica**. El 20% del código actual es preparación para integrar QPUs (D-Wave/IBM). ¡Necesitamos tu ayuda para el salto cuántico!
@@ -76,4 +76,4 @@ MIT License - **Usa, modifica, y comercia libremente** (Atribución requerida).
 ---
 
 **¿Listo para desafiar los límites del trading algorítmico?** ⚛️  
-¡Tu código podría mover mercados! 👇ñp
+¡Tu código podría mover mercados! 👇
